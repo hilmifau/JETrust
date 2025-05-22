@@ -14,12 +14,13 @@ import Nearby from '../screens/Nearby';
 import Job from '../screens/Job';
 import Cod from '../screens/Cod';
 import Wallet from '../screens/Wallet';
+import Help from '../screens/Help-center';
 import { PaperProvider } from 'react-native-paper';
 
 const Stack = createStackNavigator();
 
 const screenOptions = {
-    animation: 'slide_from_left'
+    animation: 'slide_from_left',
 }
 
 function TabHome() {
@@ -37,6 +38,7 @@ function TabHome() {
             <Stack.Screen name="Job" component={Job} options={screenOptions}/>
             <Stack.Screen name="Cod" component={Cod} options={screenOptions}/>
             <Stack.Screen name="Wallet" component={Wallet} options={screenOptions}/>
+            <Stack.Screen name="Help" component={Help} options={screenOptions}/>
         </Stack.Navigator>
     );
 }

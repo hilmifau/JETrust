@@ -6,26 +6,24 @@
  */
 import React from 'react';
 import Navigation from './src/navigation/navigator';
-import { SafeAreaProvider, } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import {
-    ScrollView,
     StatusBar,
     StyleSheet,
-    Text,
-    useColorScheme,
-    View,
 } from 'react-native';
 
 function App(): React.JSX.Element {
     return (
-        <SafeAreaProvider style={styles.container}>
-            <StatusBar
-                barStyle={'dark-content'}
-                backgroundColor="transparent"
-                translucent={true}
-            />
-            <Navigation />
-        </SafeAreaProvider>
+        <SafeAreaView style={styles.container}>
+            <SafeAreaProvider style={styles.container}>
+                <StatusBar
+                    barStyle={'dark-content'}
+                    backgroundColor="transparent"
+                    translucent={true}
+                />
+                <Navigation />
+            </SafeAreaProvider>
+        </SafeAreaView>
     );
 }
 

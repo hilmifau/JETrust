@@ -4,11 +4,8 @@ import { width, height, totalSize } from 'react-native-dimension';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Color } from "../constants.js/color";
 import Carousel from "react-native-reanimated-carousel";
-// import { TextInput } from 'react-native-paper';
-import {
-    createStaticNavigation,
-    useNavigation,
-} from '@react-navigation/native';
+import { Divider } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 import { ScrollView } from "react-native-gesture-handler";
 
 const menuItems = [
@@ -43,12 +40,17 @@ function HomeScreen() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [text, setText] = React.useState('');
 
-    const navigate = (name) => {
+    const navigateFeatures = (name) => {
         navigation.navigate(name)
+    }
+
+    const navigateToHelp = () => {
+        navigation.navigate('Help');
     }
 
     return (
         <ScrollView style={styles.container} stickyHeaderIndices={[0]}>
+
             <View style={styles.section1}>
                 <View style={styles.wrapper}>
                     <View style={styles.searchBar}>
@@ -68,18 +70,43 @@ function HomeScreen() {
                 </View>
             </View>
 
-            {/* <TextInput
-                label="Password"
-                secureTextEntry
-                right={<TextInput.Icon icon="eye" />}
-            /> */}
+            <View style={styles.section4}>
+                <View style={styles.cardProfile}>
+                    <View>
+                        <Image
+                            source={require('../assets/images/avatar.png')}
+                            style={{
+                                width: 50,
+                                height: 50,
+                                marginBottom: 10
+                            }}
+                        />
+                        <Text style={{ fontSize : 14, fontWeight: 'bold'}}>Maharani Putri Hikam</Text>
+                    </View>
+                    <View style={styles.wrapperPoint}>
+                        <View
+                            style={styles.point}
+                        >
+                            <Icon name="medal" color={Color.PrimaryDark} size={25} />
+                            <Text style={styles.text}><Text style={{ fontWeight: '900', fontSize: 14 }}>64</Text> Point</Text>
+                        </View>
+                        <View style={{ borderWidth: 0.8, borderColor: 'lightgrey' }} />
+                        <View style={styles.point}>
+                            <Icon name="vote" color={Color.PrimaryDark} size={25} />
+                            <Text style={styles.text}><Text style={{ fontWeight: '900', fontSize: 14 }}>8</Text> Voucher</Text>
+                        </View>
+                    </View>
+
+                </View>
+            </View>
+
             <View style={styles.section2}>
                 <Text style={styles.title}>Features</Text>
                 <View style={styles.card}>
                     {
                         menuItems.map((item, index) => {
                             return (
-                                <TouchableOpacity key={index} style={styles.cardMenu} onPress={() => { navigate(item.name) }}>
+                                <TouchableOpacity key={index} style={styles.cardMenu} onPress={() => { navigateFeatures(item.name) }}>
                                     <Icon name={item.icon} size={30} color={Color.PrimaryDark} />
                                     <Text style={styles.label}>{item.label}</Text>
                                 </TouchableOpacity>
@@ -88,6 +115,7 @@ function HomeScreen() {
                     }
                 </View>
             </View>
+
             <View style={styles.section3}>
                 <Text style={styles.title}>Jasa dan Produk</Text>
                 <Carousel
@@ -109,7 +137,10 @@ function HomeScreen() {
                 />
             </View>
 
-            <View style={styles.section4}>
+            <TouchableOpacity
+                style={styles.section4}
+                onPress={navigateToHelp}
+            >
                 <View style={styles.cardHelp}>
                     <View style={styles.avatarWrapper}>
                         <Image
@@ -118,14 +149,13 @@ function HomeScreen() {
                             style={styles.avatar}
                         />
                     </View>
-                    <View style={{ marginRight: 20}}>
+                    <View style={{ marginRight: 20 }}>
                         <Text style={styles.textTitle}>Help Center</Text>
                         <Text style={styles.text}>Get help and support for all your question</Text>
                     </View>
                     <Icon name="chevron-right" size={25} style={styles.icon} />
                 </View>
-
-            </View>
+            </TouchableOpacity>
 
         </ScrollView>
     );
@@ -137,7 +167,7 @@ const styles = StyleSheet.create({
         backgroundColor: Color.Surface
     },
     section1: {
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+        // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
         backgroundColor: 'white',
     },
     section2: {
@@ -149,6 +179,28 @@ const styles = StyleSheet.create({
     section4: {
         marginVertical: 15,
         marginHorizontal: 15
+    },
+    cardProfile: {
+        backgroundColor: Color.Background,
+        borderRadius: 10,
+        padding: 15,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    wrapperPoint: {
+        backgroundColor: Color.Surface,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        height: '80%',
+        width: '50%',
+        borderRadius: 10,
+        padding: 10
+    },
+    point: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     card: {
         flexDirection: 'row',
